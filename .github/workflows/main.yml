@@ -21,10 +21,10 @@ jobs:
           node-version: '14.x'
 
       - name: Install Dependencies
-        run: npm i --force
+        run: ls && cd BonAppetit && npm i --force
 
       - name: Build Angular App
-        run: npm run build
+        run: cd BonAppetit && npm run build
 
       - name: Deploy to EC2 Instance
         uses: appleboy/scp-action@master
