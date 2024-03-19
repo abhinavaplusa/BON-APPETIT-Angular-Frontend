@@ -1,4 +1,4 @@
-name: scp files
+name: copying folder to ec2 instance
 on: [push]
 jobs:
 
