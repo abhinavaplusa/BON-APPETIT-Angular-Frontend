@@ -1,9 +1,7 @@
-name: Deploy Angular App
+name: deleting folder from ec2 instance
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'release-demo-*'
 
