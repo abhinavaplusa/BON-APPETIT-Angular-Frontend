@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - master
-    tags:
-      - 'release-demo-*'
+
 
 jobs:
   deploy:
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/release-demo-')
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
