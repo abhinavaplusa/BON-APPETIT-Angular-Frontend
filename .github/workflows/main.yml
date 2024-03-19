@@ -42,5 +42,8 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/code
-            ls
+            cd /home/ubuntu/code/bon-appetit
+            ls 
+            sudo cp -r /home/ubuntu/code/test_delete
+            sudo cp -r /home/ubuntu/code/bon-appetit/* /home/ubuntu/test_backup
+            
