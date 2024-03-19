@@ -14,5 +14,6 @@ jobs:
         username: ${{ secrets.EC2_USERNAME  }}
         key: ${{ secrets.EC2_SSH_KEY  }}
         port: ${{ secrets.PORT }}
-        source: "tests/a.txt,tests/b.txt"
-        target: your_server_target_folder_path
+        source: BonAppetit
+        target: /home/ubuntu/code
+
