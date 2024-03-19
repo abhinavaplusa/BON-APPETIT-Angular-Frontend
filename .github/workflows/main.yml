@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: dist/ # Or the directory where your Angular app is built
-          target: /path/to/destination/on/ec2
+          target: /home/ubuntu/code
 
       - name: SSH into EC2 Instance and execute commands
         uses: appleboy/ssh-action@master
@@ -42,5 +42,5 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /path/to/destination/on/ec2
-            # Execute additional commands here if needed
+            cd /home/ubuntu/code
+            ls
