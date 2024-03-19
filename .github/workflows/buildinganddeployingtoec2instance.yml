@@ -55,6 +55,17 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          script: | 
+            if [ "$(ls -A /home/ubuntu/Nehal/currentBuild)" ]; then
+              sudo cp -r /home/ubuntu/Nehal/currentBuild/* /home/ubuntu/Nehal/backupBuild
+            fi
+
+      - name: Clear Current folder
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             if [ "$(ls -A /home/ubuntu/Nehal/backupBuild)" ]; then
               sudo rm -rf /home/ubuntu/Nehal/backupBuild/*
@@ -79,7 +90,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             if [ "$(ls -A /home/ubuntu/Nehal/currentBuild)" ]; then
-            sudo rm -rf /home/ubuntu/Nehal/currentBuild/*
+              sudo rm -rf /home/ubuntu/Nehal/currentBuild/*
             fi
 
       - name: SSH into EC2 Instance and execute commands to deploy
