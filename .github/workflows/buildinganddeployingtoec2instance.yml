@@ -32,7 +32,7 @@ jobs:
 
       - name: Extract Tag Name
         id: extract_tag_name
-        run: echo "::set-output name=tag_name::${{ github.ref#refs/tags/ }}"
+        run: echo "::set-output name=tag_name::${{ github.ref.split('/')[2] }}"
 
 
       - name: Deploy to EC2 Instance
