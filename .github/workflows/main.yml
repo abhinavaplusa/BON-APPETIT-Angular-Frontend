@@ -45,5 +45,5 @@ jobs:
             cd /home/ubuntu/code/bon-appetit
             ls 
             sudo cp -r /home/ubuntu/code/test_delete
-            sudo cp -r /home/ubuntu/code/bon-appetit/* /home/ubuntu/test_backup
+            sudo cp -r /home/ubuntu/code/BonAppetit/dist/bon-appetit/* /home/ubuntu/test_backup
             
