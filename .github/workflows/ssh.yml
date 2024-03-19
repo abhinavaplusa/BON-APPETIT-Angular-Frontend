@@ -1,0 +1,10 @@
+name: SSH into EC2 Instance and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo rm -rf /home/ubuntu/code/test_delete
+            sudo rm -rf /home/ubuntu/code/BonAppetit
+            sudo rm -rf /home/ubuntu/test_backup
