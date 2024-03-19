@@ -30,6 +30,15 @@ jobs:
       - name: Build Angular App
         run: cd BonAppetit && npm run build
 
+      - name: Clear OMS folder
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo rm -rf /home/ubuntu/Nehal/freshBuild/*
+
       - name: Deploy to EC2 Instance
         uses: appleboy/scp-action@master
         with:
@@ -37,13 +46,40 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: BonAppetit/dist/bon-appetit/* # Or the directory where your Angular app is built
-          target: /home/ubuntu/code/angularBuild
+          target: /home/ubuntu/Nehal/freshBuild
           
+      - name: Clear Backup folder
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo rm -rf /home/ubuntu/Nehal/backupBuild/*
+  
       - name: SSH into EC2 Instance and execute commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          script: | 
+            sudo cp -r /home/ubuntu/Nehal/currentBuild/* /home/ubuntu/Nehal/backupBuild
+
+      - name: Clear Current folder
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo cp -r /home/ubuntu/code/angularBuild/* /home/ubuntu/test_backup
+            sudo rm -rf /home/ubuntu/Nehal/currentBuild/*
+
+      - name: SSH into EC2 Instance and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: | 
+            sudo cp -r /home/ubuntu/Nehal/freshBuild/* /home/ubuntu/Nehal/currentBuild
