@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: BonAppetit/dist/bon-appetit/* # Or the directory where your Angular app is built
-          target: /home/ubuntu/code/${{ steps.extract_tag_name.outputs.tag_name }}
+          target: /home/ubuntu/code/angularBuild
           
       - name: SSH into EC2 Instance and execute commands
         uses: appleboy/ssh-action@master
@@ -51,4 +51,4 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo cp -r /home/ubuntu/code/BonAppetit/dist/${{ github.ref }}/* /home/ubuntu/test_backup
+            sudo cp -r /home/ubuntu/code/angularBuild/* /home/ubuntu/test_backup
