@@ -27,18 +27,7 @@ jobs:
 
       # - name: Build Angular App
       #   run: cd BonAppetit && npm run build
-        
-      - name: Clear Fresh folder if not empty
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            if [ "$(ls -A /home/ubuntu/Nehal/freshBuild)" ]; then
-              sudo rm -rf /home/ubuntu/Nehal/freshBuild/*
-            fi
-
+    
       - name: Deploy to EC2 Instance
         uses: appleboy/scp-action@master
         with:
@@ -103,4 +92,4 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo cp -r /home/ubuntu/Nehal/freshBuild/* /home/ubuntu/Nehal/currentBuild
+            sudo cp -r /home/ubuntu/Nehal/freshBuild/bon-appetit/* /home/ubuntu/Nehal/currentBuild
