@@ -49,7 +49,7 @@ jobs:
       
       - name: Deploy to EC2 Instance
         run: |
-          scp -r ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/BonAppetit/dist/ /home/ubuntu/Nehal/freshBuild
+          scp -r ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/BonAppetit/dist/bon-appetit/ /home/ubuntu/Nehal/freshBuild
 
 
 
