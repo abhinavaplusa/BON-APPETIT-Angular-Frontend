@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            mv -f /home/ubuntu/Nehal/freshBuild/BonAppetit/dist/bon-appetit /home/ubuntu/Nehal/freshBuild/
+            mv -fT /home/ubuntu/Nehal/freshBuild/BonAppetit/dist/bon-appetit /home/ubuntu/Nehal/freshBuild/
           
       - name: Remove BonAppetit folder
         uses: appleboy/ssh-action@master
