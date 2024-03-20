@@ -43,7 +43,10 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-    
+
+      - name: Add EC2 host key to known hosts
+        run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+      
       - name: Deploy to EC2 Instance
         run: |
           scp -r ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/BonAppetit/dist/ /home/ubuntu/Nehal/freshBuild
