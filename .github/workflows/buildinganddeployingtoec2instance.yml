@@ -27,10 +27,17 @@ jobs:
 
       - name: Build Angular App
         run: cd BonAppetit && npm run build
-
+        
       - name: Deploy to EC2 Instance
-        run: scp -i ${{ secrets.EC2_SSH_KEY }} BonAppetit/dist/bon-appetit ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/ubuntu/Nehal/freshBuild
-      
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "BonAppetit/dist/bon-appetit"
+          target: "/home/ubuntu/Nehal/freshBuild"
+
+
       - name: Clear Backup folder if not empty
         uses: appleboy/ssh-action@master
         with:
