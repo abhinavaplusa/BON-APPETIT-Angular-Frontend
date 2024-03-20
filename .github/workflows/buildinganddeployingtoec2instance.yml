@@ -39,6 +39,11 @@ jobs:
               sudo rm -rf /home/ubuntu/Nehal/freshBuild/*
             fi
 
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    
       - name: Deploy to EC2 Instance
         run: |
           scp -r ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/BonAppetit/dist/ /home/ubuntu/Nehal/freshBuild
